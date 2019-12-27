@@ -1,23 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const DrumPad = ({ id, letter, source }) => {
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyPressed);
+
+    return () => document.removeEventListener('keydown', onKeyPressed);
+  });
+
+  const onKeyPressed = event => {
+    if (event.key.toUpperCase() === letter) {
+      audioPlay();
+    }
+  };
+
   const audioPlay = () => {
     const clip = document.getElementById(letter);
     clip.currentTime = 0;
     clip.play();
   };
 
-  const onKeyPressed = event => {
-    console.log(event.key);
-  };
-
   return (
-    <div
-      className="drum-pad"
-      id={id}
-      onClick={audioPlay}
-      onKeyDown={event => onKeyPressed(event)}
-    >
+    <div className="drum-pad" id={id} onClick={audioPlay}>
       {letter}
       <audio src={source} className="clip" id={letter} />
     </div>
