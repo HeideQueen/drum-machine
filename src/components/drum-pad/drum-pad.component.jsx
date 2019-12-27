@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-const DrumPad = ({ id, letter, source }) => {
+const DrumPad = ({ id, letter, source, updateDescription }) => {
   useEffect(() => {
     document.addEventListener('keydown', onKeyPressed);
 
@@ -8,21 +8,20 @@ const DrumPad = ({ id, letter, source }) => {
   });
 
   const onKeyPressed = event => {
-    if (event.key.toUpperCase() === letter) {
-      audioPlay();
-    }
+    if (event.key.toUpperCase() === letter) audioPlay();
   };
 
   const audioPlay = () => {
     const clip = document.getElementById(letter);
     clip.currentTime = 0;
     clip.play();
+    updateDescription(id);
   };
 
   return (
-    <div className="drum-pad" id={id} onClick={audioPlay}>
+    <div className='drum-pad' id={id} onClick={audioPlay}>
       {letter}
-      <audio src={source} className="clip" id={letter} />
+      <audio src={source} className='clip' id={letter} />
     </div>
   );
 };
