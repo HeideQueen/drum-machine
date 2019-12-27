@@ -1,13 +1,15 @@
 import React from 'react';
 import DrumDisplay from './components/drum-display/drum-display.component';
 
-import './App.css';
+import Container from 'react-bootstrap/Container';
+
+import './App.scss';
 
 const App = () => {
   return (
-    <div id='drum-machine'>
+    <Container id='drum-machine'>
       <DrumDisplay />
-    </div>
+    </Container>
   );
 };
 
